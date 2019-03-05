@@ -8,7 +8,7 @@ body,html{
 .wrap{
     height: 100%;
     margin-top: 20px;
-    overflow-x: auto;
+
 }
 
 .top>p{
@@ -31,7 +31,7 @@ body,html{
 .blocks-folder{
     display: flex;
     font-family: Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
-    max-height: 650px;
+    overflow-x: auto;
 
 }
 .blocks-folder__block{
