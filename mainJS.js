@@ -15,8 +15,10 @@ class MainController {
         var BlockWrapper = document.createElement("div");
         BlockWrapper.className = "Block__wrapper";
 
+
         this.htmlItem.appendChild(BlockWrapper);
         BlockWrapper.appendChild(htmlBlock);
+
 
 
         var newBlock = new Block(htmlBlock);
@@ -26,6 +28,7 @@ class MainController {
 
 class Block {
     constructor(htmlItem){
+        console.log(htmlItem);
         this.tasks = [];
         this.htmlItem = htmlItem;
         this.taskID = 1;
@@ -34,6 +37,9 @@ class Block {
     }
 
     init() {
+        this.TaskWrapper = document.createElement('div');
+        this.TaskWrapper.className = "TaskWrapper";
+
         this.BlockName = document.createElement('div');
         this.BlockName.className = 'blocks-folder__block__name';
         this.BlockName.innerHTML = 'Введите название блока';
@@ -50,11 +56,13 @@ class Block {
         ButtonCreateText.innerHTML = "Добавить задачу";
         ButtonCreateText.className = "Block__Buttons__CreateButton";
 
+
         this.htmlItem.appendChild(this.BlockName);
         this.htmlItem.appendChild(BlockButtons);
         BlockButtons.appendChild(htmlBlockDeleteButton);
         BlockButtons.appendChild(htmlCreateTaskButton);
         htmlCreateTaskButton.appendChild(ButtonCreateText);
+        this.htmlItem.appendChild(this.TaskWrapper);
 
         this.BlockName.addEventListener('click', this.EditBlockName.bind(this));
         htmlBlockDeleteButton.addEventListener('click', this.removeBlock.bind(this));
@@ -79,12 +87,12 @@ class Block {
         TasknameDiv.id = 'TaskName№' + this.taskID;
         TasknameDiv.className = "list__item__name_div";
 
-        this.htmlItem.appendChild(htmlTask);
+        this.TaskWrapper.appendChild(htmlTask);
         htmlTask.appendChild(TasknameDiv);
 
         var deleteTask = document.createElement("div");
         deleteTask.className = "list__item__deletebutton";
-        deleteTask.innerHTML = "d";
+        deleteTask.innerHTML = "x";
         deleteTask.dataset.id = "" + this.taskID;
 
         htmlTask.appendChild(deleteTask);
@@ -105,7 +113,7 @@ class Block {
     removeTask(event) {
         var dataId = event.target.dataset.id;
         var task = this.tasks[dataId];
-        this.htmlItem.removeChild(task.htmlItem);
+        this.TaskWrapper.removeChild(task.htmlItem);
         this.tasks[dataId] = "";
     }
 }
